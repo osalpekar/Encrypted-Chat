@@ -1,0 +1,10 @@
+#OS Files
+.DS_Store
+
+#python
+*.pyc
+*.swp
+
+#random
+.doc
+.docx
