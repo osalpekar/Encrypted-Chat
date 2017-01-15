@@ -1,4 +1,4 @@
-MESSAGE_LENGTH = 200
+MESSAGE_LENGTH = 4096
 
 #### Client messages ####
 
