@@ -8,22 +8,22 @@ CHANNELS = []
 CHANNEL_DICT = {} #Maps channel names to channel lists
 SOCKET_NAMES = {} #Maps sockets to client names
 BUFFER = {} #Maps clients to partial messages
-HOST = '127.0.0.1'
 
 def server():
 	
     #parse the command line arguments
     args = sys.argv
-    if (len(args) != 2):
-        print 'Please enter only port number in your command line arguments'
+    if (len(args) != 3):
+        print 'Please enter only IP Address port number in your command line arguments'
         sys.exit()
 
-    port = int(args[1])
+    host = str(args[1])
+    port = int(args[2])
     
     #create server socket
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    server_socket.bind((HOST, port))
+    server_socket.bind((host, port))
     server_socket.listen(5)
 
     # add server socket object to the list of readable connections
@@ -188,7 +188,7 @@ def server():
                     temp_name = SOCKET_NAMES[sock]
                     for key, value in CHANNEL_DICT.iteritems(): 
                         if sock in value:
-                            message = pad(CLIENT_SERVER_DISCONNECTED.format(HOST, port))
+                            message = pad(CLIENT_SERVER_DISCONNECTED.format(host, port))
                             broadcast(server_socket, sock, value, message)
                     if sock in SOCKET_LIST:
                         SOCKET_LIST.remove(sock)
